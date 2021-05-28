@@ -1,0 +1,242 @@
+\documentclass[presentation]{beamer}
+\usepackage{notes_style_v3}
+\usecolortheme{myct3}
+\usepackage[orientation=landscape,size=custom,width=16,height=9.75,scale=0.5,debug]{beamerposter}
+\usepackage{multimedia}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes.geometric,positioning,automata}
+\usetikzlibrary{trees,decorations.pathmorphing,calc}
+\usetikzlibrary{intersections}
+
+\title[CAS as Coordination Media]{ScaFi-Web}
+\subtitle{A Web-Based Application for Field-based Coordination Programming}
+
+\author[G.Aguzzi]
+{\textbf{Gianluca Aguzzi}, Roberto Casadei, Niccolò Maltoni, Danilo Pianini, Mirko Viroli}
+
+\usepackage[backend=bibtex,style=alphabetic]{biblatex} %,citestyle=authoryear
+
+\usepackage{pifont}
+\usepackage{marvosym}
+\newcommand{\demoSymbol}{{\Large \ding{249}}} %{{\Large \Faxmachine}} %{\ding{43}}%
+
+\institute[shortinst]{\normalsize 
+%\inst{1} 
+\textsc{Alma Mater Studiorum}--Universit\`a di Bologna, Cesena, Italy 
+}
+
+\bibliography{biblio} 
+
+\definecolor{pbfilling}{HTML}{ffffff}% filling color for the progress bar
+%\definecolor{pbfilling}{HTML}{aaaaaa}% background color for the progress bar
+\definecolor{pbbackground}{rgb}{0.36, 0.54, 0.66}
+
+\makeatletter
+\def\progressbar@progressbar{} % the progress bar
+\newcount\progressbar@tmpcounta% auxiliary counter
+\newcount\progressbar@tmpcountb% auxiliary counter
+\newdimen\progressbar@pbht %progressbar height
+\newdimen\progressbar@pbwd %progressbar width
+\newdimen\progressbar@tmpdim % auxiliary dimension
+\progressbar@pbwd=\paperwidth
+\progressbar@pbht=0.5ex
+% the progress bar
+\def\progressbar@progressbar{%
+    \progressbar@tmpcounta= \insertframenumber % max = ?
+    \progressbar@tmpcountb=\inserttotalframenumber      
+    \progressbar@tmpdim=.5\progressbar@pbwd
+    \multiply\progressbar@tmpdim by \progressbar@tmpcounta
+    \divide\progressbar@tmpdim by \progressbar@tmpcountb
+    \progressbar@tmpdim=2\progressbar@tmpdim
+  \begin{tikzpicture}[rounded corners=0,very thin]
+    \shade[top color=pbbackground,bottom color=pbbackground,middle color=pbbackground]
+      (0pt, 0pt) rectangle ++ (\progressbar@pbwd, \progressbar@pbht);
+      \shade[draw=pbfilling,top color=pbfilling,bottom color=pbfilling,middle color=pbfilling] %
+        (0pt, 0pt) rectangle ++ (\progressbar@tmpdim, \progressbar@pbht);
+  \end{tikzpicture}%
+}
+
+\setbeamertemplate{headline}{%
+\leavevmode%
+  \vbox{
+  \hbox{
+    \begin{beamercolorbox}[wd=1\paperwidth,ht=0.7ex,sep=0pt,center,dp=0ex]{white}%
+    \progressbar@progressbar%
+    \end{beamercolorbox}%
+  }
+  \hbox{%
+  \hypersetup{linkcolor=white}
+    \begin{beamercolorbox}[wd=1.02\paperwidth,ht=2.5ex,dp=1.125ex]{headline}%
+    \insertsubsectionnavigationhorizontal{\paperwidth}{\bfseries\hfill}{\hfill}
+    \end{beamercolorbox}%
+  }
+  }
+}
+
+\let\oldcite\cite
+%%% additional documents commands
+\newcommand{\scafiweb}{{\sc{}ScaFi-Web}}
+\newcommand{\scafi}{{\sc{}ScaFi}}
+\renewcommand{\cite}[1]{{\color{blue}\oldcite{#1}}}
+
+\begin{document}
+
+\frame[label=coverpage,noframenumbering,plain]{
+\titlepage
+
+  \begin{center}
+  Talk {@}\\
+  \textbf{COORDINATION 2021} \\
+  23rd International Conference on Coordination Models and Languages
+  \end{center}
+}
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+  \begin{block}{Field Based Coordination~\cite{Viroli-et-al:JLAMP-2019}}
+    A coordination model that leverages \lenf{computational fields} to orchestrate large scale systems.
+  \end{block}
+  \begin{block}{Aggregate Programming~\cite{IEEECIOT2015}}
+    A \lenf{top-down} and \lenf{global-to-local} approach 
+    to the specification of the collective adaptive behaviour of a distributed system.
+  
+  \end{block}
+    
+
+
+%\imgv{0.3}{collective-comm.png}
+
+\end{frame}
+\begin{frame}[fragile]{Aggregate Programming}
+\begin{itemize}
+  \item \lbl{Benefits}: 
+  \iz{
+    \item Abstract over technologies and network topologies
+    \item Describe behaviour in a functional and compositional manner
+    \item Proved to have, in certain circumstances, relevent properties such as \lenf{eventual consistency}~\cite{DBLP:conf/saso/BealVPD16} and \lenf{self-stabilisation}~\cite{DBLP:conf/saso/BealV14a}
+    \item Used in different scenario such as crowd management~\cite{IEEECIOT2015}, UAVs~\cite{DBLP:conf/coordination/CasadeiVAPD19} and Smart cities~\cite{casadei2019scc}
+  }
+  \item \lbl{Problem:} Hard to use
+  \iz{
+    \item High learning curve
+    \item Plethora of tools involved 
+    \item Need of simulations
+    \item Lack of tools for real-system monitoring
+  }
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Starting point and inspiration}
+
+\begin{block}{Tool-chain}
+  \begin{itemize}
+  \item \lenf{ScaFi}~\cite{DBLP:conf/ecoop/CasadeiV16}: a modular Scala-based toolchain for aggregate programming comprising an inner-DSL, a simulator and actor-based platfrom
+  \item \lenf{Protelis}~\cite{ProtelisSAC14}: a Java-interoperable stand-alone DSL
+  \item \lenf{FCPP}~\cite{fcpp}: a lightweight native implementation
+  \end{itemize}
+\end{block}
+  
+\begin{block}{Playgrounds}
+
+\begin{itemize}
+\item \lenf{WebProto~\cite{DBLP:conf/saso/UsbeckB13}}: a pioneer no longer maintained playground for Proto
+\item \lenf{ScalaFiddle \& Scastie}: well-known Scala playgrounds
+\end{itemize}
+
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Goals}
+
+\begin{itemize}
+\item Reducing the learning time of \scafi{}
+\item Inject different aggregate programming languages
+\item Zero-install distribution
+\item Support also remote program execution
+\item Reuse as much as possible the \scafi{} codeline
+\end{itemize}
+  
+\end{frame}
+
+\section{Contribution}
+
+\begin{frame}[fragile]{Architecture}
+
+\begin{itemize}
+\item A language-agnostic web interface to visualize \lenf{aggregate} systems
+\item Support abstraction language and system dependent
+\item Local \scafi{} simulator 
+\item Remote Scala code compilation
+\end{itemize}
+\imgh{0.9}{architecture}
+\end{frame}
+
+\begin{frame}[fragile]{Current Usage Scenario}
+
+
+\begin{block}{Learning and education}
+  \begin{itemize}
+  \item Exposing an environment with minimal requirements
+  \item Sequence of guided example
+  \item Simplified access to the simulated sensors and actuators
+  \end{itemize}
+\end{block}
+
+\begin{block}{Fast Prototyping}
+  \begin{itemize}
+  \item Aggregate programming require an iterative, incremental process of program refinement
+  \item Our approach supports this workflow proving a simulated enviroment with zero instalation overhead
+  \end{itemize}
+  
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]{Demo}
+  \centering
+  \url{https://scafi.github.io/web/}
+\imgh{0.8}{scafi-web-large.png}
+
+\end{frame}
+  
+%%Todo
+\section{Conclusion \& Future Work}
+
+\begin{frame}{Conclusion}
+
+%\imgh{0.9}{example-image}
+%
+\begin{itemize}
+\item \scafiweb{} enables:
+\iz{
+\item Fast prototyping
+\item Exploratory testing
+\item Easy application deployment
+\item Pedagogical support for learning
+}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Future work}
+
+\begin{itemize}
+\item Support of remote aggregate programming execution
+\item Support other aggregate programming languages
+\item Extend \scafiweb{} for monitoring and control of deployed systems
+\end{itemize}
+\imgh{0.9}{remote-support}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Bibliography}
+\def\bibfont{\footnotesize}
+\printbibliography
+\end{frame}
+
+\end{document}
+
+
+% \sizedrangedcode{\ssmall}{3}{30}{\labdir/code/code_sec1.txt} 

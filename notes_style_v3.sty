@@ -1,0 +1,669 @@
+\geometry{paperwidth=140mm,paperheight=105mm}
+
+% CHEATSHEET!!!!!
+% http://www.cpt.univ-mrs.fr/~masson/latex/Beamer-appearance-cheat-sheet.pdf
+
+\usetheme{CambridgeUS}
+ 
+\usepackage{trace}
+\usepackage[english]{babel}
+
+\usepackage{changepage}
+\usepackage{amsmath}
+\usepackage[makeroom]{cancel}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{mathpartir} % for \inferrule
+\usepackage[utf8]{inputenc}
+\usepackage{cprotect}
+\usepackage{subfig}
+\usepackage{soul}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+\usepackage[most]{tcolorbox} 
+ 
+\author[G. Aguzzi] % (optional, use only with lots of authors)
+{Gianluca Aguzzi} %\inst{1} \and S.~Another\inst{2}}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+ 
+\institute[] %]Universities of Somewhere and Elsewhere] % (optional, but mostly needed)
+{
+  %\inst{1}%
+  %Department of Computer Science\\
+  %University of Bologna
+}
+ % \and
+ % \inst{2}%
+ % Department of Theoretical Philosophy\\
+ % University of Elsewhere}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+ 
+%\date[CFP 2003] % (optional, should be abbreviation of conference name)
+%{Conference on Fabulous Presentations, 2003}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\usepackage{listings}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{vlightgray}{rgb}{0.98,0.98,0.98}
+
+\usepackage{textcomp}
+
+\lstset{ %
+  backgroundcolor=\color{vlightgray},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\lst@ifdisplaystyle\small\fi\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=none,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  otherkeywords={...,noexcept},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=4,                       % sets default tabsize to 2 spaces
+  title=\lstname,                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+  columns=fullflexible,
+  lineskip={-1.5pt},
+  xleftmargin=5px,
+  belowskip={-12px},
+  aboveskip={4px},
+  emphstyle=\textbf,
+  upquote=true
+}
+ 
+\lstdefinelanguage{scala}{
+  morekeywords={abstract,case,catch,class,def,%
+    do,else,extends,false,final,finally,%
+    for,if,implicit,import,match,mixin,%
+    new,null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,%
+    type,val,var,while,with,yield},
+  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+} 
+ 
+ 
+\lstdefinelanguage{CSS}{
+  keywords={color,background-image:,margin,padding,font,weight,display,position,top,left,right,bottom,list,style,border,size,white,space,min,width, transition:, transform:, transition-property, transition-duration, transition-timing-function},	
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  alsoletter={:},
+  alsodigit={-}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, yield, async, await, const, for,
+  extends, super, require, const,constructor,this,class,try,let},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]`,
+  sensitive=true,
+}
+
+\lstdefinelanguage{kotlin}{
+  morekeywords={abstract,case,catch,class,def,%
+    do,else,extends,false,final,finally,%
+    for,if,implicit,import,match,mixin,%
+    null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,fun,inline,reified,out,%
+    type,val,var,while,with,data,when,as,expect,annotation,actual,
+    public, private, internal, protected,when,is,interface,in,typealias},
+  keywordstyle=[2]\bfseries\color{red},
+  keywords=[2]{lateinit, open, get, set,field, constructor,suspend,yield,operator,by,it,vararg,sealed,inner,infix},
+  keywordstyle=[3]\bfseries\color{orange},
+  keywords=[3]{Any,Unit,String,Int,Double}
+  otherkeywords={=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]""",
+}  
+
+\lstdefinelanguage{Alchemist}{
+morecomment=[l]{//},
+keywords={def,lsa,add,del,has,isempty,hasnot,with,linking,rule,params,type,environment,
+default,in,range,linking,nodes,point,all,containing,named,place,node,position,type,random,concentration,
+seed,time,notempty,reactions,circle,rect,interval,tolerance,poiunt,at,time}
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,	
+  alsoletter={<>=-},	
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  otherkeywords={
+  % General
+  >,
+  % Standard tags
+	<!DOCTYPE,
+  </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+	% body
+	</body, <body,
+	% Divs
+	</div, <div, </div>, 
+	% Paragraphs
+	</p, <p, </p>,
+	% scripts
+	</script, <script,
+  % More tags...
+  <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>
+  },
+  ndkeywords={
+  % General
+  =,
+  % HTML attributes
+  charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+  % SVG attributes
+  fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+  % CSS properties
+  margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:,
+	% CSS3 properties
+  transform:, -moz-transform:, -webkit-transform:,
+  animation:, -webkit-animation:,
+  transition:,  transition-duration:, transition-property:, transition-timing-function:,
+  }
+}
+
+\newcommand\YAMLcolonstyle{\color{red}}
+\newcommand\YAMLkeystyle{\color{black}\ttfamily}
+\newcommand\YAMLvaluestyle{\color{blue}}
+
+\makeatletter
+
+% here is a macro expanding to the name of the language
+% (handy if you decide to change it further down the road)
+\newcommand\language@yaml{yaml}
+
+\expandafter\expandafter\expandafter\lstdefinelanguage
+\expandafter{\language@yaml}
+{
+  keywords={true,false,null,y,n},
+  keywordstyle=\color{darkgray}\bfseries,
+  basicstyle=\YAMLkeystyle,                                 % assuming a key comes first
+  sensitive=false,
+  comment=[l]{\#},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\YAMLvaluestyle\ttfamily,
+  moredelim=[l][\color{orange}]{\&},
+  moredelim=[l][\color{magenta}]{*},
+  moredelim=**[il][\YAMLcolonstyle{:}\YAMLvaluestyle]{:},   % switch to value style at :
+  morestring=[b]',
+  morestring=[b]",
+  literate =    {---}{{\ProcessThreeDashes}}3
+                {>}{{\textcolor{red}\textgreater}}1     
+                {|}{{\textcolor{red}\textbar}}1 
+                {\ -\ }{{\mdseries\ -\ }}3,
+}
+
+\lstdefinelanguage{Golang}%
+  {morekeywords=[1]{package,import,func,type,struct,return,defer,panic,%
+     recover,select,var,const,iota,},%
+   morekeywords=[2]{string,uint,uint8,uint16,uint32,uint64,int,int8,int16,%
+     int32,int64,bool,float32,float64,complex64,complex128,byte,rune,uintptr,%
+     error,interface},%
+   morekeywords=[3]{map,slice,make,new,nil,len,cap,copy,close,true,false,%
+     delete,append,real,imag,complex,chan,go},%
+   morekeywords=[4]{for,break,continue,range,goto,switch,case,fallthrough,if,%
+     else,default,},%
+   morekeywords=[5]{Println,Printf,Error,},%
+   sensitive=true,%
+   morecomment=[l]{//},%
+   morecomment=[s]{/*}{*/},%
+   morestring=[b]',%
+   morestring=[b]",%
+   morestring=[s]{`}{`},%
+   }
+ 
+
+% switch to key style at EOL
+\lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\YAMLkeystyle\fi}
+\makeatother
+
+\newcommand\ProcessThreeDashes{\llap{\color{cyan}\mdseries-{-}-}}
+
+\newcounter{cont}
+\makeatletter
+%allowframebreaks numbering in the title
+\setbeamertemplate{frametitle continuation}{%
+    \setcounter{cont}{\beamer@endpageofframe}%
+    \addtocounter{cont}{1}%
+    \addtocounter{cont}{-\beamer@startpageofframe}%
+    (\insertcontinuationcount/\arabic{cont})%
+}
+\makeatother
+ 
+\subject{Computer Science}
+% This is only inserted into the PDF information catalog. Can be left
+% out. 
+
+ 
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+ 
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+ 
+
+\definecolor{darkgreen}{rgb}{0,0.8,0}
+\definecolor{ddarkgreen}{rgb}{0,0.5,0}
+\definecolor{dgreen}{rgb}{0,0.4,0}
+\definecolor{questcolor}{rgb}{0.4,0,0.4}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+\definecolor{enfcolor}{rgb}{0, 0.50, 0.83}
+ 
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+ 
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+ 
+
+\newcommand{\esempio}[1]{\textcolor{dgreen}{#1}}
+
+
+\newcommand{\badstyle}[1]{\textcolor{darkred}{#1}}
+\newcommand{\goodstyle}[1]{\textcolor{darkgreen}{#1}}
+
+\newcommand{\pers}[1]{\textcolor{violet}{#1}}
+\newcommand{\enf}[1]{\textcolor{enfcolor}{#1}}
+\newcommand{\benf}[1]{\textbf{\textcolor{enfcolor}{#1}}}
+\newcommand{\eenf}[1]{\textcolor{red}{#1}}
+\newcommand{\lenf}[1]{\textcolor{darkgray}{\textbf{\emph{#1}}}}
+\newcommand{\tw}[1]{\texttt{#1}}
+\newcommand{\bo}[1]{\textbf{#1}}
+\newcommand{\boenf}[1]{\textbf{#1}}
+\newcommand{\question}[1]{\textcolor{darkgray}{\emph{\bo{#1}}}}
+\newcommand{\domanda}[1]{\textbf{\textcolor{orange}{#1}}}
+
+\newcommand{\lex}[1]{\textcolor{ddarkgreen}{#1}}
+\newcommand{\ex}[1]{\textbf{\color{mygreen}{#1}}}
+\newcommand{\highlight}[1]{\textbf{\color{red}{#1}}}
+\newcommand{\cemph}[1]{\texttt{\bfseries\textcolor{blue}{#1}}}
+\newcommand{\empha}[1]{\textcolor{red}{#1}}
+\newcommand{\emphb}[1]{\textcolor{blue}{#1}}
+\newcommand{\emphc}[1]{\textcolor{darkblue}{#1}}
+\newcommand{\extt}[1]{\ttb{\color{mygreen}{#1}}}
+\newcommand{\ttb}[1]{\textbf{\texttt{#1}}}
+\newcommand{\hlb}[1]{\highlight{\texttt{#1}}}
+
+\newcommand{\rolea}[1]{\setlength{\fboxsep}{0pt}\colorbox{purple!30}{#1}}
+\newcommand{\roleb}[1]{\setlength{\fboxsep}{0pt}\colorbox{orange!30}{#1}}
+
+\newcommand{\lbl}[1]{\textbf{\textcolor{airforceblue}{#1}}}
+ \newcommand{\nwl}[1]{\vspace{0.2cm}}
+\newcommand{\nwll}[1]{\vspace{0.1cm}}
+\newcommand{\imp}[1]{\textbf{\emphc{#1}}}
+
+\newcommand{\eqhla}[1]{\colorbox{green!30}{$\displaystyle#1$}}
+\newcommand{\eqhlb}[1]{\colorbox{yellow!70}{$\displaystyle#1$}}
+\newcommand{\eqhlc}[1]{\colorbox{orange!50}{$\displaystyle#1$}}
+\newcommand{\eqhld}[1]{\colorbox{cyan!30}{$\displaystyle#1$}}
+\newcommand{\eqhle}[1]{\colorbox{gray!30}{$\displaystyle#1$}}
+
+\usepackage{relsize}
+\newcommand{\mbig}[1]{\mathlarger{#1}}
+\newcommand{\mlarge}[1]{\mathlarger{\mathlarger{#1}}}
+\newcommand{\mhuge}[1]{\mathlarger{\mathlarger{\mathlarger{#1}}}}
+
+\definecolor{coloremphcode}{rgb}{0.8,0.4,0.0}
+\newcommand{\codesm}[2]{\lstinline[basicstyle=\ttfamily\normalsize,emph={#1}]@#2@} %\end{lstlisting}
+\newcommand{\cod}[1]{\codesm{}{#1}}
+\newcommand{\codem}[1]{\lstinline[basicstyle=\bfseries\ttfamily\normalsize\color{coloremphcode}]@#1@} %\end{lstlisting}
+\newcommand{\codebig}[1]{
+\lstset{basicstyle=\ttfamily\normalsize}
+\begin{lstlisting}
+#1
+\end{lstlisting}
+}
+
+\newcommand{\shc}[1]{\shce{#1}{}} %\end{lstlisting}
+\newcommand{\shce}[2]{\lstinline[emph={#2},language={bash},backgroundcolor=\color{vlightgray},basicstyle=\bfseries\ttfamily\normalsize]@$ #1@} %\end{lstlisting}
+ 
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes.geometric,positioning,automata}
+\tikzstyle{vertex}=[draw,circle,black,bottom color=white,
+                  top color= white, text=white,minimum width=10pt]
+\tikzstyle{vertexf}=[draw,circle,black,fill=gray,text=white,minimum width=10pt]
+
+\usepackage{xspace}
+\providecommand{\then}{$\Longrightarrow$\xspace}  
+
+\newcommand{\inbraces}[1]{\ensuremath{\lbrace #1 \rbrace}}
+\newcommand{\inangles}[1]{\ensuremath{\langle #1 \rangle}}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+ 
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+%\AtBeginSection[]
+%{
+%  \begin{frame}[plain,noframenumbering]
+%  \frametitle{Outline}
+%    \tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+%  \end{frame}
+%}
+ 
+%\AtBeginSubsection
+%{
+%  \begin{frame}[plain,noframenumbering]
+%  \frametitle{Outline}
+%    \tableofcontents[currentsection,currentsubsection,subsectionstyle=show/shaded/hide]
+%  \end{frame}
+%}
+ 
+ 
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+ 
+%\beamerdefaultoverlayspecification{<+->}
+ 
+ 
+\usepackage{xspace}
+\newcommand{\lstar}{$\bigstar$\xspace}
+\newcommand{\ra}{$\rightarrow$\xspace}
+\newcommand{\lambdacalc}{$\lambda\text{-calculus}$\xspace}
+\newcommand{\lambdasys}{$\lambda\text{-system}$\xspace}
+\newcommand{\lambdanotation}{$\lambda\text{-notation}$\xspace}
+\newcommand{\lambdaterm}{$\lambda\text{-term}$\xspace}
+\newcommand{\nf}{$\beta\text{-nf}$\xspace}
+\newcommand{\literm}{$\lambda I\text{-term}$\xspace}
+\def\redux1{\ensuremath{~~\triangleright_{1\beta}~~}}
+\def\bredux{\ensuremath{~~\triangleright_{\beta}~~}}
+\newcommand\comb[1]{\ensuremath{\mathrm{\mathbf{#1}}}}
+\def\I{\ensuremath{\comb{I}}}
+\def\K{\ensuremath{\comb{K}}}
+\def\S{\ensuremath{\comb{S}}}
+\def\B{\ensuremath{\comb{B}}}
+\def\C{\ensuremath{\comb{C}}}
+\def\W{\ensuremath{\comb{W}}}
+\def\Y{\ensuremath{\comb{Y}}}
+\def\wcontracts{\ensuremath{~~\triangleright_{1w}~~}}
+\def\wredux{\ensuremath{~~\triangleright_{w}~~}}
+\def\bwredux{\ensuremath{~~\triangleright_{\beta w}~~}}
+\def\bweq{\ensuremath{~~=_{\beta w}~~}}
+\def\betaeq{\ensuremath{~~=_{\beta}~~}}
+\def\weq{\ensuremath{~~=_{w}~~}}
+\def\l{\ensuremath{\lambda}}
+\def\eqv{\ensuremath{~~\equiv~~}}
+\newcommand{\rula}{\begin{center}\vspace{0.2cm}\rule{11cm}{0.4pt}\vspace{0.2cm}\end{center}\xspace}
+\newcommand{\eqra}[0]{\ensuremath{\quad\rightarrow\quad}}
+\newcommand\inpar[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\op}[1]{\ensuremath{~\operatorname{#1}~}}
+\newcommand{\symt}[2]{\ensuremath{\stackrel{\mathclap{\normalfont\mbox{\scriptsize\ensuremath{#2}}}}{#1}}}
+\newcommand{\torel}[1]{\ensuremath{\symt{\rightarrow}{#1}}}
+
+\newenvironment{myfr}[1][]
+{\begin{frame}[fragile,environment=xframe]
+\frametitle{#1}}
+{\end{frame}}
+  
+\newcommand{\fr}[2]{\begin{frame}\frametitle{#1}#2\end{frame}}
+\newcommand{\frm}[2]{\begin{frame}[allowframebreaks]\frametitle{#1}#2\end{frame}}
+\newcommand{\frs}[3]{\begin{frame}[shrink=#1]\frametitle{#2}#3\end{frame}}
+\newcommand{\ffr}[2]{\begin{frame}[fragile]\frametitle{#1}#2\end{frame}}
+\newcommand{\cil}[1]{\lstinline[language=java,basicstyle=\normalsize\ttfamily]$#1$}%\end{lstlisting}
+\newcommand{\bl}[2]{{
+%\setbeamertemplate{blocks}[default]
+%\setbeamercolor{block body}{bg=gray!10}
+%\setbeamercolor{block title}{bg=red!15, fg=darkred}
+\begin{block}{#1}#2\end{block}
+}
+}
+\newcommand{\bx}[1]{\vspace{5pt}\begin{beamerboxesrounded}[shadow=true]{}#1\end{beamerboxesrounded}}
+\newcommand{\iz}[1]{\begin{itemize}#1\end{itemize}}
+\newcommand{\imgpath}{imgs/}
+\newcommand{\en}[1]{\begin{enumerate}[1)]
+#1
+\end{enumerate}}
+\newcommand{\img}[2]{
+\begin{figure}
+\centering
+\includegraphics[height=#1\textheight]{imgs/#2}
+\end{figure}
+}
+\newcommand{\imgc}[3]{
+\begin{figure}
+\centering
+\includegraphics[height=#1\textheight]{imgs/#2}
+\caption{#3}
+\end{figure}
+}
+\newcommand{\imgh}[2]{
+\begin{figure}
+\centering
+\includegraphics[width=#1\textwidth]{imgs/#2}
+\end{figure}
+}
+\newcommand{\imgv}[2]{
+\begin{figure}
+\centering
+\includegraphics[height=#1\textheight]{imgs/#2}
+\end{figure}
+}
+
+\newcommand{\hsplit}[2]{
+\begin{minipage}{0.48\textwidth}
+#1
+\end{minipage}
+\hfill
+\begin{minipage}{0.48\textwidth}
+#2
+\end{minipage}
+}
+\newcommand{\hsplits}[4]{
+\begin{minipage}{#1\textwidth}
+#3
+\end{minipage}
+\hfill
+\begin{minipage}{#2\textwidth}
+#4
+\end{minipage}
+}
+
+%\newcommand{\h3split}[3]{
+%\begin{minipage}{0.32\textwidth}
+%#1
+%\end{minipage}
+%\hfill
+%\begin{minipage}{0.32\textwidth}
+%#2
+%\end{minipage}
+%\hfill
+%\begin{minipage}{0.32\textwidth}
+%#3
+%\end{minipage}
+%}
+
+\newcommand{\psplit}[4]{
+\begin{minipage}{#1\textwidth}
+#3
+\end{minipage}
+\hfill
+\begin{minipage}{#2\textwidth}
+#4
+\end{minipage}
+}
+ 
+\everymath{\color{darkblue}} 
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+ 
+\newenvironment<>{mydef}[1][]
+  {\alert{\upshape\textbf{Definition}} \textbf{#1}\hspace*{\fill} \\
+   \itshape}
+  {} 
+  
+\setbeamertemplate{defn begin}{{
+\inserttheoremheadfont
+\inserttheoremname
+\inserttheoremnumber
+\ifx\inserttheoremaddition\@empty\else\ (\inserttheoremaddition)\fi%
+\inserttheorempunctuation
+}}
+\setbeamertemplate{defn end}{}  
+
+\setbeamertemplate{theorems}[numbered]
+
+
+% \AtBeginDocument{\setlength\abovedisplayskip{0pt}}
+
+%\usepackage[backend=bibtex,mincitenames=2]{biblatex} 
+
+\makeatletter
+\def\blx@maxline{77}
+\makeatother
+
+\newcommand{\basicpaper}[2]{%
+%%\colorbox{gray!30}{%
+%\parbox{0.9\textwidth}{
+%#1
+%\textcolor{black}{\citetitle{#2}} 
+%\textcolor{airforceblue}{\citeauthor{#2}}
+%\textcolor{airforceblue}{\citeyear{#2}}
+%~\textcolor{airforceblue}{\cite{#2}}
+%}
+%%}
+\fullcite{#2}
+}
+
+%\AtEveryCitekey{\clearfield{volume}\clearfield{pages}\clearfield{url}\clearfield{editors}\clearfield{doi}\clearfield{published}\clearfield{bibsource}\clearfield{abstract}\clearfield{organization}\clearfield{issn}\clearfield{isbn}\clearfield{editor}\clearfield{location}}
+
+
+\newcommand{\paper}[1]{\basicpaper{}{#1}}
+\newcommand{\book}[1]{\basicpaper{(Book)~}{#1}}
+\newcommand{\spaper}[1]{\basicpaper{(Seminal)~}{#1}}
+\newcommand{\papertoread}[1]{\basicpaper{\textcolor{red}{(ToRead)}~}{#1}}
+\newcommand{\paperalmostread}[1]{\basicpaper{\textcolor{orange}{(AlmostRead)}~}{#1}}
+\newcommand{\paperread}[1]{\basicpaper{(READ)~}{#1}}
+
+
+\setbeamertemplate{bibliography item}[text]
+
+\newcommand*\LSTBig{\ttfamily\large}
+\newcommand*\LSTNormal{\ttfamily\normalsize}
+\newcommand*\LSTSmall{\ttfamily\small}
+\newcommand*\LSTSsmall{\ttfamily\footnotesize}
+\newcommand*\LSTSssmall{\ttfamily\scriptsize}
+
+\newcommand{\dollar}{\mbox{\textdollar}}
+
+\definecolor{normalcol}{rgb}{0.74,0.74,0}
+
+\newcommand{\GoodS}{{\color{ddarkgreen}\faThumbsOUp}\xspace}
+\newcommand{\BadS}{{\color{red}\faThumbsODown}\xspace}
+\newcommand{\sco}{$\color{airforceblue}\text{\bfseries{}--}$}
+% ftp://ftp.dante.de/tex-archive/fonts/fontawesome/doc/fontawesome.pdf
+\newcommand{\itemcont}{\item[\color{airforceblue}\faEllipsisH]} 
+\newcommand{\itemsub}{\item[\color{airforceblue}\faMinus]} 
+\newcommand{\itemeg}{\item[\color{airforceblue}\faBicycle]}
+\newcommand{\itemesc}{\item[\color{airforceblue}\faExclamationTriangle]}
+\newcommand{\itemptr}{\item[\color{airforceblue}\faForward]}
+\newcommand{\itemgood}{\item[\color{darkgreen}\faThumbsOUp]}
+\newcommand{\itembad}{\item[\color{red}\faThumbsODown]}
+\newcommand{\itemnorm}{\item[\color{normalcol}\faHandSpockO]}
+\newcommand{\itemnbad}{\item[\color{airforceblue}\faHandStopO]}
+\newcommand{\itemso}{\item[\color{airforceblue}\faChevronRight]}
+\newcommand{\itemq}{\item[\color{airforceblue}\faQuestionCircle]}
+\newcommand{\itemthen}{\item[\color{airforceblue}\faArrowRight]}
+\newcommand{\itemref}{\item[\color{airforceblue}\faExternalLink]}
+\newcommand{\itemc}{\item[\color{airforceblue}\faCircle]}
+\newcommand{\itemwait}{\item[\color{airforceblue}\faHandStopO]}
+\newcommand{\itemmine}{\item[\color{airforceblue}\faGraduationCap]}
+\newcommand{\itm}{\item[\color{airforceblue}\faChevronCircleRight]}
+\newcommand{\itemast}{\item[\color{airforceblue}\faAsterisk]}
+\newcommand{\itemra}{\item[\color{airforceblue}\faArrowRight]}
+\newcommand{\itemread}{\item[\color{airforceblue}\faCheckSquareO]}
+\newcommand{\itemtoread}{\item[\color{airforceblue}\faAsterisk]}
+\newcommand{\itemseminal}{\item[\color{airforceblue}\faStar]}
+\newcommand{\itemfst}{\item[\color{airforceblue}\bfseries{}1)]}
+\newcommand{\itemsnd}{\item[\color{airforceblue}\bfseries{}2)]}
+\newcommand{\itemthr}{\item[\color{airforceblue}\bfseries{}3)]}
+\newcommand{\itemfour}{\item[\color{airforceblue}\bfseries{}4)]}
+\newcommand{\itemfive}{\item[\color{airforceblue}\bfseries{}5)]}
+\newcommand{\itemnb}{\item[\color{airforceblue}\faExclamationCircle]}
+\newcommand{\itemidea}{\item[\color{airforceblue}\faLightbulbO]}
+\newcommand{\itemtip}{\item[\color{airforceblue}\faLightbulbO]}
+\newcommand{\itemneq}{\item[$\color{airforceblue}\mathbf{\neq}$]} %\faExchange
+\newcommand{\goodtxt}[1]{{\color{ddarkgreen}#1}}
+\newcommand{\badtxt}[1]{{\color{red}#1}}
+\newcommand{\notice}{\lbl{Note:} }
+\newcommand{\thus}{{~\color{airforceblue}\faArrowRight~}}
+\newcommand{\itemhorn}{\item[\color{airforceblue}\faBullhorn]}
+\newcommand{\itembell}{\item[\color{airforceblue}\faBell]}
+\newcommand{\itembook}{\item[\color{airforceblue}\faBook]}
+\newcommand{\warningSym}{\faExclamationTriangle}
+
+\newcommand{\csym}[1]{{\lstset{basicstyle=\color{darkblue}\ttfamily}\lstinline|#1|}}
+\newcommand{\csyme}[1]{{\lstset{basicstyle=\fontseries{b}\color{blue}\ttfamily}\lstinline|#1|}}
+
+%\usepackage{microtype}
+%\DisableLigatures[-]{}
+
+\usepackage{parskip}
+\setlength{\parskip}{1.1\smallskipamount} 
+
+\setbeamertemplate{itemize/enumerate body begin}{\small}
+\setbeamertemplate{itemize/enumerate subbody begin}{\footnotesize}
+
+\beamertemplatenavigationsymbolsempty
+
+\hypersetup{colorlinks=false,linkcolor=blue!50!red,urlcolor=orange!60!black}
+
+\newcommand{\myhref}[2]{\href{#1}{\color{blue}{[#2]}}}
+\newcommand{\tlink}[1]{\href{#1}{\faExternalLink}}
+
+\newcommand{\refslides}[2]{{\color{violet}\href{run:#1.pdf}{#2~\faExternalLink}}}
+
+\lstset{basicstyle=\ttfamily\footnotesize}
+
+
+\newcommand{\microserv}{\colorbox{gray!5}{\textmu{}service}\xspace}
+\newcommand{\microservs}{\colorbox{gray!5}{\textmu{}services}\xspace}
+
+\newcommand{\rfto}[1]{\hyperlink{#1}{\color{red}\faArrowCircleRight}}
+\newcommand{\erfto}[1]{Slide~\ref{#1}~\rfto{#1}}
+
+\newcommand{\citeay}[1]{\pers{(\citeauthor*{#1},\citeyear{#1})\cite{#1}}}
